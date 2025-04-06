@@ -1,0 +1,102 @@
+<div class="blog-container">
+    <div *ngIf="loading() && mixedContent().length === 0" class="skeleton-wrapper">
+      <!-- Skeleton for title -->
+      <div class="skeleton-title"></div>
+      <!-- Skeleton for meta info -->
+      <div class="skeleton-meta"></div>
+      <!-- Skeleton for paragraphs -->
+      <ng-container *ngFor="let i of [1,2,3,4,5]">
+        <div class="skeleton-paragraph"></div>
+      </ng-container>
+      <div class="skeleton-image"></div>
+      <ng-container *ngFor="let i of [1,2,3,4,5]">
+        <div class="skeleton-paragraph"></div>
+      </ng-container>
+      <div class="skeleton-image"></div>
+    </div>
+  
+    <div class="blog-wrapper" *ngIf="mixedContent().length > 0">
+      <header class="blog-header">
+        <div class="title-wrapper">
+          <h1 class="blog-title">{{ subject() }}</h1>
+          <div class="blog-meta">
+            <span>{{ readTime() }} min read</span>
+          </div>
+        </div>
+        <div class="blog-tags" *ngIf="tags().length">
+          <span *ngFor="let tag of tags()" class="tag">{{ tag }}</span>
+        </div>
+      </header>
+  
+      <main class="blog-content">
+        <ng-container *ngFor="let block of mixedContent()">
+          <!-- Text Content -->
+          <ng-container *ngIf="isString(block)">
+            <div class="content-block" [innerHTML]="block | safeHtml"></div>
+          </ng-container>
+  
+          <!-- Image -->
+          <ng-container *ngIf="isImageBlock(block)">
+            <div class="image-block">
+              <ng-container *ngIf="block.loading; else imageLoaded">
+                <div class="image-placeholder">
+                  <span class="spinner"></span>
+                </div>
+              </ng-container>
+              <ng-template #imageLoaded>
+                <a
+                  *ngIf="block.image"
+                  [href]="affiliateLink()"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="image-link"
+                >
+                  <img
+                    [src]="block.image"
+                    [alt]="'Visual for ' + (block.prompt || subject())"
+                    (load)="onImageLoad($event)"
+                    (error)="handleImageError(block)"
+                    class="blog-image"
+                  />
+                </a>
+                <div *ngIf="!block.image" class="image-error">
+                  <p>Image not available for "{{ block.prompt || subject() }}"</p>
+                </div>
+              </ng-template>
+            </div>
+          </ng-container>
+  
+          <!-- Affiliate Link -->
+          <ng-container *ngIf="isAffiliateBlock(block)">
+            <div class="affiliate-block">
+              <a
+                [href]="affiliateLink()"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="affiliate-btn"
+              >
+                👉 Explore this product for "{{ subject() }}"
+              </a>
+            </div>
+          </ng-container>
+        </ng-container>
+      </main>
+  
+      <footer class="blog-footer">
+        <div class="export-controls">
+          <button (click)="exportAsHtml()" class="export-btn">⬇️ HTML</button>
+          <button (click)="exportAsMarkdown()" class="export-btn">📝 Markdown</button>
+        </div>
+      </footer>
+    </div>
+  
+    <!-- Back to Top Button -->
+    <button
+      class="back-to-top"
+      [ngClass]="{ visible: showBackToTop() }"
+      (click)="scrollToTop()"
+      aria-label="Back to top"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </div>

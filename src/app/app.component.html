@@ -1,0 +1,97 @@
+<!-- app.component.html -->
+<div class="app-wrapper" [attr.data-theme]="theme">
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <a routerLink="/blog">
+          <img
+            [src]="theme === 'dark' ? 'vdya-dark.png' : 'vdya-light.png'"
+            [srcset]="theme === 'dark' ? 'vdya-dark.png 1x, vdya-dark.png 2x' : 'vdya-light.png 1x, vdya-light.png 2x'"
+            alt="VDYA"
+            class="logo-image"
+          />
+        </a>
+      </div>
+      <div class="header-actions">
+        <!-- Share button with dropdown (visible only on blog page) -->
+        <div class="share-wrapper">
+          <button
+            *ngIf="isBlogPage()"
+            class="share-btn"
+            (click)="shareBlog()"
+            aria-label="Share this blog"
+          >
+            <i class="fas fa-share-alt"></i>
+            <span class="share-text">Share</span>
+          </button>
+          <div class="share-options" *ngIf="showShareOptions">
+            <a
+              href="https://twitter.com/intent/tweet?url={{ currentUrl }}&text=Check out this blog on Blog Explorer!"
+              target="_blank"
+              class="share-option"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}"
+              target="_blank"
+              class="share-option"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title=Check out this blog on Blog Explorer!"
+              target="_blank"
+              class="share-option"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <button class="share-option" (click)="copyLink()" aria-label="Copy link">
+              <i class="fas fa-link"></i>
+            </button>
+          </div>
+        </div>
+        <button
+          class="theme-toggle"
+          (click)="toggleTheme()"
+          aria-label="Toggle dark mode"
+        >
+          🌙
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Blog Explorer</h3>
+        <p>Unlock creativity and inspiration at your fingertips.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a routerLink="/blog">Home</a></li>
+          <li><a routerLink="/about">About</a></li>
+          <li><a routerLink="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul class="social-links">
+          <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+          <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+          <li><a href="https://pinterest.com" target="_blank">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Blog Explorer. All rights reserved.</p>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,23 @@
+<div class="tool-list">
+  <div class="categories">
+    <button
+      [class.active]="selectedCategory() === null"
+      (click)="filterByCategory(null)"
+    >
+      All
+    </button>
+    <button
+      *ngFor="let category of categories()"
+      [class.active]="selectedCategory() === category"
+      (click)="filterByCategory(category)"
+    >
+      {{ category }}
+    </button>
+  </div>
+  <div class="tools-grid">
+    <a *ngFor="let tool of tools()" [routerLink]="['/tools/ai-tool', tool.id]" class="tool-card">
+      <h3>{{ tool.name }}</h3>
+      <p>{{ tool.description }}</p>
+    </a>
+  </div>
+</div>

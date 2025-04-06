@@ -1,0 +1,42 @@
+<div class="tool-execute" *ngIf="tool()">
+    <header class="hero">
+      <h1>{{ tool().id || 'Chat' }}</h1>
+    </header>
+  
+    <div class="chat-container" *ngIf="outputText().length">
+      <div class="message ai-message" *ngFor="let text of outputText(); let i = index">
+        <p>{{ text }}</p>
+        <span class="copy-icon" (click)="copyOutput(i)">📋</span>
+        <div class="suggested-prompts" *ngIf="suggestedPrompts().length">
+          <span *ngFor="let prompt of suggestedPrompts()" class="prompt-chip" (click)="selectPrompt(prompt)"
+            [class.selected]="selectedPrompt === prompt">
+            {{ prompt }}
+          </span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="input-section">
+      <div class="suggested-prompts" *ngIf="suggestedPrompts().length">
+        <span *ngFor="let prompt of suggestedPrompts()" class="prompt-chip" (click)="selectPrompt(prompt)"
+          [class.selected]="selectedPrompt === prompt">
+          {{ prompt }}
+        </span>
+      </div>
+      <textarea #inputBox [(ngModel)]="inputText" (input)="onInputChange()" (keypress)="onKeyPress($event)"
+        placeholder="Type your prompt here..." aria-label="Chat input" rows="4"></textarea>
+      <button (click)="executeTool()" [disabled]="loading() || !inputText.trim()" class="execute-btn">
+        <span *ngIf="loading()" class="spinner"></span>
+        {{ loading() ? '...' : 'Send' }}
+      </button>
+      <button (click)="clearChat()" class="clear-btn">Clear</button>
+    </div>
+  </div>
+  
+  <ng-template #notFound>
+    <div class="not-found">
+      <h1>Tool Not Found</h1>
+      <p>The requested tool does not exist. Please select a tool from the list.</p>
+      <a routerLink="/tools">Back to Tools</a>
+    </div>
+  </ng-template>

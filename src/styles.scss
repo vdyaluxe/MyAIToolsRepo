@@ -1,0 +1,73 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Define CSS variables for theming */
+:root {
+  /* Light mode (default) */
+  --text-color: #333;
+  --card-background: #fff;
+  --card-background-rgb: 255, 255, 255; /* For rgba usage */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --input-border: #ddd;
+  --tag-background: #e9ecef;
+  --tag-text: #495057;
+  --affiliate-bg: #28a745;
+  --affiliate-hover-bg: #218838;
+  --export-bg: #6c757d;
+  --export-hover-bg: #5a6268;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --text-color: #e0e0e0;
+  --card-background: #1e1e1e;
+  --card-background-rgb: 30, 30, 30;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --input-border: #444;
+  --tag-background: #343a40;
+  --tag-text: #ced4da;
+  --affiliate-bg: #2ecc71;
+  --affiliate-hover-bg: #27ae60;
+  --export-bg: #adb5bd;
+  --export-hover-bg: #909296;
+}
+
+/* Global styles */
+body {
+  background: var(--card-background);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #0056b3;
+  }
+}
+
+button {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Ensure the app takes up the full height */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

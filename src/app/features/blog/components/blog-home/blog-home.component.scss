@@ -1,0 +1,259 @@
+.home-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+  }
+  
+  .hero {
+    margin-bottom: 2.5rem;
+    margin-top: 1rem;
+  
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+  
+    .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      font-weight: 400;
+    }
+  }
+  
+  .search-container {
+    margin-bottom: 3rem;
+  }
+  
+  .search-box {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .input-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .search-box {
+    input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      font-size: 1rem;
+      border: 1px solid var(--input-border);
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 2px 4px var(--shadow-color);
+      background: var(--card-background);
+      color: var(--text-color);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+      }
+    }
+  
+    button {
+      padding: 0.9rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      flex-shrink: 0;
+  
+      &:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+  
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  .suggestion-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem 0;
+    background: var(--card-background);
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    list-style: none;
+    z-index: 10;
+    text-align: left;
+  
+    li {
+      padding: 0.75rem 1.2rem;
+      font-size: 0.95rem;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+  
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+  
+  .trending-section {
+    margin-top: 2rem;
+  
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 1.5rem;
+    }
+  
+    .trending-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 equal columns by default */
+      gap: 1.5rem; /* Space between cards */
+      justify-items: center; /* Center items when fewer cards are displayed */
+      max-width: 1200px; /* Prevents cards from stretching too wide */
+      margin: 0 auto;
+  
+      /* On screens smaller than 900px, switch to a 2-column layout */
+      @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 1fr); /* 2 equal columns on medium screens */
+      }
+  
+      /* On screens smaller than 600px, switch to a single column layout */
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr; /* 1 column on very small screens */
+      }
+  
+      .trending-card {
+        padding: 1.5rem;
+        background: var(--card-background);
+        border: 1px solid var(--input-border);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px var(--shadow-color);
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+        text-align: center;
+  
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 6px 16px var(--shadow-color);
+          background-color: #f5faff;
+        }
+      }
+  
+      .skeleton-card {
+        width: 250px; /* Match the card width */
+        height: 130px; /* Match the card height */
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite ease-in-out;
+        border-radius: 10px;
+      }
+    }
+  }
+  
+  .recent-blogs {
+    margin-top: 3rem;
+  
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 1.5rem;
+    }
+  
+    .recent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+  
+      .recent-card {
+        padding: 1.5rem;
+        background: var(--card-background);
+        border: 1px solid var(--input-border);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px var(--shadow-color);
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+        text-align: center;
+  
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 6px 16px var(--shadow-color);
+          background-color: #f5faff;
+        }
+      }
+    }
+  }
+  
+  .ai-tools-section {
+    margin-top: 3rem;
+  
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+  
+    .explore-tools-btn {
+      display: inline-block;
+      padding: 0.9rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+  
+      &:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+    }
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  @keyframes fade {
+    from {
+      opacity: 0.5;
+    }
+    to {
+      opacity: 1;
+    }
+  }

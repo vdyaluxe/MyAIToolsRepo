@@ -1,0 +1,58 @@
+<div class="home-container">
+  <header class="hero">
+    <h1>Discover Your Next Big Idea</h1>
+    <p class="subtitle">Unleash creativity with custom blog topics and AI-powered text tools.</p>
+  </header>
+
+  <div class="search-container">
+    <div class="search-box">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="onSearchInput($event)"
+          placeholder="Enter a topic, e.g., AI for Designers"
+          aria-label="Search for a blog topic"
+        />
+        <ul class="suggestion-box" *ngIf="suggestions().length > 0">
+          <li *ngFor="let sug of suggestions()" (click)="useSuggestion(sug)">
+            <span>{{ sug }}</span>
+          </li>
+        </ul>
+      </div>
+      <button (click)="search()" aria-label="Generate blog">Generate Blog</button>
+    </div>
+  </div>
+
+  <section class="trending-section">
+    <h2>🔥 Trending Blogs</h2>
+    <div class="trending-grid" *ngIf="!loading()">
+      <div *ngFor="let topic of trending()" class="trending-card" (click)="openTrending(topic)">
+        {{ topic }}
+      </div>
+    </div>
+    <div *ngIf="loading()" class="trending-grid">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+  </section>
+
+  <section class="recent-blogs" *ngIf="recentBlogs().length > 0">
+    <h2>📖 Recent Blogs</h2>
+    <div class="recent-grid">
+      <div *ngFor="let blog of recentBlogs()" class="recent-card" (click)="openRecent(blog.subject)">
+        {{ blog.subject }}
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-tools-section">
+    <h2>✨ Explore AI Text Tools</h2>
+    <p>Enhance your writing with AI-powered tools for anything.</p>
+    <a routerLink="/tools/ai-tool-list" class="explore-tools-btn">View All Tools</a>
+  </section>
+</div>
